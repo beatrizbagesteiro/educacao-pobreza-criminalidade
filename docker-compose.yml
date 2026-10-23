@@ -4,6 +4,8 @@ x-airflow-common:
     context: .
     dockerfile: airflow_config/Dockerfile
   image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:3.3.1}
+  env_file:
+    - .env
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -22,6 +24,7 @@ x-airflow-common:
     MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
     AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+    PYTHONPATH: /opt/airflow
   volumes:
     - ./dags:/opt/airflow/dags
     - ./src:/opt/airflow/dags/src
@@ -30,6 +33,8 @@ x-airflow-common:
     - ./plugins:/opt/airflow/plugins
     - ./config:/opt/airflow/config
     - ./src:/opt/airflow/src
+    - ./main.py:/opt/airflow/main.py
+    - ./init_dw.sql:/docker-entrypoint-initdb.d/init_dw.sql
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -77,8 +82,9 @@ services:
       - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init_db:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -91,8 +97,8 @@ services:
       <<: *airflow-common-env
       _AIRFLOW_DB_MIGRATE: 'true'
       _AIRFLOW_WWW_USER_CREATE: 'true'
-      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
-      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow} # define o padrao de 'airflow'
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow} # define o padrao de 'airflow'
     user: "0:0"
 
   airflow-apiserver:
@@ -156,19 +162,6 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-
-  spark-env:
-    image: jupyter/pyspark-notebook:spark-3.5.0
-    container_name: pyspark
-    ports:
-      - "8888:8888" 
-      - "4040:4040"
-    volumes:
-      - ./:/home/jovyan/work 
-    environment:
-      - JUPYTER_ENABLE_LAB=yes
-      - GRANT_SUDO=yes
-    user: root
     
 volumes:
   minio_data:

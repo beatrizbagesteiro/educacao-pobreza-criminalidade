@@ -3,6 +3,8 @@ numpy
 matplotlib
 minio
 psycopg2-binary
+sqlalchemy
 asyncpg
-polars
-fastexcel
+pyarrow
+dotenv
+requests
