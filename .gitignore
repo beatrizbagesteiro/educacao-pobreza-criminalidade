@@ -1,5 +1,6 @@
 data/
 .env
+.venv/
 .vscode/
 
 # Python cache
@@ -7,3 +8,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Airflow logs
+logs/

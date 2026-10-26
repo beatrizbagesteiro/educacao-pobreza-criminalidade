@@ -1,5 +1,3 @@
-
-
 CREATE TABLE IF NOT EXISTS d_municipio (
     co_municipio INT PRIMARY KEY,
     nome_municipio VARCHAR(250) NOT NULL
