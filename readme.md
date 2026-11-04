@@ -1,6 +1,5 @@
-# [Nome do Projeto]
+# Pipeline de Dados Educacionais e Socioeconômicos (Brasil - 2024)
 
-<!-- Badges (opcional) -->
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-green)
 
 ## 📋 Índice
@@ -72,6 +71,11 @@ O projeto segue a Arquitetura Medalhão para estruturar o fluxo de dados em trê
 | Bronze | Armazenamento dos dados brutos no MinIO, preservando o histórico original extraído das fontes (INEP, CadÚnico e IBGE SIDRA) sem qualquer alteração.       |
 | Silver | Limpeza, padronização de tipos e conversão dos dados para o formato Parquet no MinIO, seguidos pela ingestão em uma área de *staging* temporária no PostgreSQL.       |
 | Gold   | Modelagem dimensional (*Star Schema*) no PostgreSQL, organizando os dados consolidados em tabelas Fato e Dimensão totalmente prontas para consumo analítico e ferramentas de BI.       |
+
+## 🚀 To do
+Alterações futuras:
+* **Ingestão de um novo DataSet:** Ingestão e modelagem de conjuntos de dados governamentais de Segurança Pública (Criminalidade), permitindo o cruzamento de indicadores de segurança com o cenário educacional (INEP) e socioeconômico (CadÚnico).
+* **Visualização de Dados e BI:** Conexão da camada Gold do PostgreSQL com uma ferramenta de Business Intelligence para o desenvolvimento de um dashboard interativo voltado à extração de *insights*.
 
 ## ✉️ Contato
 
