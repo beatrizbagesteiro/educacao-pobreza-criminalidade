@@ -74,8 +74,8 @@ O projeto segue a Arquitetura Medalhão para estruturar o fluxo de dados em trê
 
 ## 🚀 To do
 Alterações futuras:
-* **Ingestão de um novo DataSet:** Ingestão e modelagem de conjuntos de dados governamentais de Segurança Pública (Criminalidade), permitindo o cruzamento de indicadores de segurança com o cenário educacional (INEP) e socioeconômico (CadÚnico).
-* **Visualização de Dados e BI:** Conexão da camada Gold do PostgreSQL com uma ferramenta de Business Intelligence para o desenvolvimento de um dashboard interativo voltado à extração de *insights*.
+* **Ingestão de um novo DataSet:** Ingestão e modelagem de conjuntos de dados governamentais de Segurança Pública (Criminalidade).
+* **Visualização de Dados e BI:** Conexão da camada Gold do PostgreSQL com uma ferramenta de Business Intelligence.
 
 ## ✉️ Contato
 
