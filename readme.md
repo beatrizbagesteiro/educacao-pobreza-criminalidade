@@ -34,44 +34,46 @@ O fluxo de dados segue a arquitetura Medalhão e é orquestrado pelo Apache Airf
 
 ## 💻 Tecnologias Utilizadas
 
-- **[ ]**
-- **[ ]**
-- **[ ]**
+- **Python**
+- **Pandas**
+- **Apache Airflow**
+- **MinIO**
+- **PostgreSQL**
+- **Docker & Docker Compose**
 
 ## ⚙️ Pré-requisitos
-
-[ ]
-
-- [ ]
-- [ ]
+- **Git**: Para clonar o repositório.
+- **Docker e Docker Compose**: Para orquestrar os serviços da arquitetura (Airflow, MinIO e PostgreSQL).
 
 ## 🚀 Instalação e Execução
 
-### Passo 1: [ ]
-
+### Passo 1
 ```bash
-# Comando de exemplo
+git clone https://github.com/beatrizbagesteiro/educacao-pobreza-criminalidade.git
 ```
 
-### Passo 2: [ ]
-
+### Passo 2
+Inicie os contêineres do Airflow, MinIO e PostgreSQL através do comando abaixo:
 ```bash
-# Comando de exemplo
+docker compose up -d
 ```
 
+### Passo 3
+As ferramentas estarão disponíveis localmente:
+- Apache Airflow: http://localhost:8080 
+- MinIO Console: http://localhost:9001 
+- PostgreSQL: Conecte via interface de sua preferência ou por linha de comando.
+  
 ## 📊 Modelagem de Dados
+O projeto segue a Arquitetura Medalhão para estruturar o fluxo de dados em três níveis progressivos de refinamento:
 
-[ ]
-
-<!-- Exemplo de tabela em Markdown -->
 | Camada | Descrição |
 | ------ | --------- |
-| Bronze | [ ]       |
-| Silver | [ ]       |
-| Gold   | [ ]       |
+| Bronze | Armazenamento dos dados brutos no MinIO, preservando o histórico original extraído das fontes (INEP, CadÚnico e IBGE SIDRA) sem qualquer alteração.       |
+| Silver | Limpeza, padronização de tipos e conversão dos dados para o formato Parquet no MinIO, seguidos pela ingestão em uma área de *staging* temporária no PostgreSQL.       |
+| Gold   | Modelagem dimensional (*Star Schema*) no PostgreSQL, organizando os dados consolidados em tabelas Fato e Dimensão totalmente prontas para consumo analítico e ferramentas de BI.       |
 
 ## ✉️ Contato
 
-- **[Seu Nome]** - [Seu Email]
-- **LinkedIn**: [Link para o LinkedIn]
-- **Portfólio/GitHub**: [Link para o GitHub]
+- **Beatriz Pimentel Bagesteiro Alves** - beatriz_bagesteiro@hotmail.com
+- **LinkedIn**: [Link para o LinkedIn](https://www.linkedin.com/in/beatriz-p-b-alves/)
