@@ -1,4 +1,4 @@
-CREATE DATABASE dw_indicadores_sociais;
+CREATE DATABASE IF NOT EXISTS dw_indicadores_sociais;
 
 \c dw_indicadores_sociais;
 

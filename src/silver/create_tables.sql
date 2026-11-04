@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS silver.populacao_estimada_2024 (
 
 CREATE TABLE IF NOT EXISTS silver.cad_unico_2024 (
     id SERIAL PRIMARY KEY,
+    referencia DATE NOT NULL,
     co_municipio INT NOT NULL,
     no_municipio VARCHAR(250) NOT NULL,
     sg_uf VARCHAR(2) NOT NULL,

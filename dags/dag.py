@@ -1,5 +1,4 @@
 from airflow.sdk import dag, task
-from airflow.models.baseoperator import cross_downstream
 from src.bronze.load_censo_escolar import load_bronze_censo_escolar
 from src.bronze.load_cad_unico import load_bronze_cad_unico
 from src.bronze.load_populacao_estimada import load_bronze_populacao_estimada
@@ -35,8 +34,8 @@ def pipeline():
         data_transformation_populacao_estimada()
 
     @task.sql(conn_id="postgres_dw")
-    def silver_create_schema():
-        caminho = "/opt/airflow/src/silver/create_schema_silver.sql"
+    def silver_create_tables():
+        caminho = "/opt/airflow/src/silver/create_tables.sql"
         with open(caminho, "r") as sql:
             query_sql = sql.read()
         
@@ -54,6 +53,21 @@ def pipeline():
     def silver_load_populacao_estimada_to_postgres():
         load_populacao_estimada_to_postgres()
 
+    @task.sql(conn_id="postgres_dw")
+    def gold_create_dim_table():
+        caminho = "/opt/airflow/src/gold/create_dim_table.sql"
+        with open(caminho, "r") as sql:
+            query_sql = sql.read()
+        return query_sql
+
+    @task.sql(conn_id="postgres_dw")
+    def gold_create_fact_table():
+        caminho = "/opt/airflow/src/gold/create_fact_table.sql"
+        with open(caminho, "r") as sql:
+            query_sql = sql.read()
+        
+        return query_sql
+
     # Task Dependencies
     bronze_load_censo_escolar = bronze_load_censo_escolar()
     bronze_load_cad_unico = bronze_load_cad_unico()
@@ -61,12 +75,14 @@ def pipeline():
     silver_transformation_censo_escolar= silver_transformation_censo_escolar()
     silver_transformation_cad_unico = silver_transformation_cad_unico()
     silver_transformation_populacao_estimada = silver_transformation_populacao_estimada()
-    silver_create_schema = silver_create_schema()
+    silver_create_tables = silver_create_tables()
     silver_load_censo_escolar_to_postgres = silver_load_censo_escolar_to_postgres()
     silver_load_cad_unico_to_postgres = silver_load_cad_unico_to_postgres()
     silver_load_populacao_estimada_to_postgres = silver_load_populacao_estimada_to_postgres()
+    gold_create_dim_table = gold_create_dim_table()
+    gold_create_fact_table = gold_create_fact_table()
 
-    silver_create_schema >> [silver_load_censo_escolar_to_postgres, silver_load_cad_unico_to_postgres, silver_load_populacao_estimada_to_postgres]
+    silver_create_tables >> [silver_load_censo_escolar_to_postgres, silver_load_cad_unico_to_postgres, silver_load_populacao_estimada_to_postgres] >> gold_create_dim_table >> gold_create_fact_table
     
     bronze_load_censo_escolar >> silver_transformation_censo_escolar >> silver_load_censo_escolar_to_postgres
     bronze_load_cad_unico >> silver_transformation_cad_unico >> silver_load_cad_unico_to_postgres

@@ -24,9 +24,12 @@ def data_transformation_populacao_estimada():
 
     df_silver['no_municipio'] = df_silver['no_municipio'].str[:-5]
 
+
     df_silver = df_silver.iloc[1:].reset_index(drop=True)
 
-    df_silver['cont_populacao'] = pd.to_numeric(df_silver['cont_populacao'], errors='coerce')
+    df_silver = df_silver[df_silver["co_municipio"] != "5101837"]
+    
+    df_silver['co_municipio'] = df_silver['co_municipio'].astype(str).str[:-1]
 
     df_silver = cast_type(df_silver,['cont_populacao','co_municipio'],'Int64')
 

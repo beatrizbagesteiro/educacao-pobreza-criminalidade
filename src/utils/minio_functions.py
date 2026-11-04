@@ -16,26 +16,29 @@ def get_minio_client() -> Minio:
     )
 
 def minio_uploader(source_file, destination_file, bucket_name):
-    logging.info(f"Iniciando ingestão do dataset {source_file}...")
+    logger.info(f"Iniciando ingestão do dataset para {destination_file}...")
     client = get_minio_client()
+    
     try:
-        found = client.bucket_exists(bucket_name)
-        if not found:
+        if not client.bucket_exists(bucket_name):
             client.make_bucket(bucket_name)
-            logger.info("Criado o bucket", bucket_name)
+            logger.info(f"Criado o bucket {bucket_name}")
+
+        if isinstance(source_file, str):
+            client.fput_object(bucket_name, destination_file, source_file)
         else:
-            logger.info("O bucket", bucket_name, "já existe")
+            file_length = source_file.getbuffer().nbytes
+            client.put_object(
+                bucket_name, 
+                destination_file, 
+                source_file, 
+                length=file_length
+            )
+            
+        logger.info(f"Sucesso! Salvo como {destination_file} no bucket {bucket_name}")
 
-        client.fput_object(
-            bucket_name, destination_file, source_file,
-        )
-        logger.info(f"Sucesso! {source_file} salvo como {destination_file} no bucket {bucket_name}")
-
-    except S3Error as err:
-        logger.error(f"Ocorreu um erro no MinIO: {err}")
     except Exception as e:
         logger.error(f"Erro inesperado: {e}")
-
 
 def get_from_minio(bucket_name, object_name):
     client = get_minio_client()

@@ -36,12 +36,12 @@ def data_transformation_censo_escolar():
     regions = ['Nordeste', 'Sudeste']
 
     df_silver = select_base_and_prefixed_columns(df_silver, base_columns, infra_prefixes)
-    df_silver = utils.filter_values(df_silver, 'NO_REGIAO', regions)
 
     cols_to_cast = [c for c in df_silver.columns if c.startswith(infra_prefixes)]
     df_silver = utils.cast_type(df_silver, cols_to_cast, 'int64')
 
     df_silver = utils.columns_name_to_lower(df_silver)
+    df_silver['co_municipio'] = df_silver['co_municipio'].astype(str).str[:-1]
 
     caminho_temp = "/tmp/censo_escolar_silver.parquet"
     df_silver.to_parquet(caminho_temp, index=False, compression='snappy')
