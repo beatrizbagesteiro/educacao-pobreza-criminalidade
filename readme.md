@@ -29,7 +29,8 @@ O ano de 2024 foi escolhido porque apresentou os dados mais completos e padroniz
 
 ## 🏗️ Arquitetura
 O fluxo de dados segue a arquitetura Medalhão e é orquestrado pelo Apache Airflow. Todo o ambiente de extração, Data Lake (MinIO) e Data Warehouse (PostgreSQL) está conteinerizado utilizando Docker.
-<img width="1292" height="621" alt="Diagrama_Arquitetura" src="https://github.com/user-attachments/assets/ba17bea0-0af9-4ac4-89ec-ccb16b9720cb" />
+
+<img width="1292" height="620" alt="Diagrama_Arquitetura" src="https://github.com/user-attachments/assets/89531699-833a-411c-9ddc-6d5ce62a9bf8" />
 
 ## 💻 Tecnologias Utilizadas
 
