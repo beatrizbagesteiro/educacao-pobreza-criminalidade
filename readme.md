@@ -28,11 +28,8 @@ Para a criação desse pipeline, foram utilizadas três bases de dados públicas
 O ano de 2024 foi escolhido porque apresentou os dados mais completos e padronizados nas três plataformas simultaneamente. Essa consistência foi essencial para garantir um cruzamento confiável entre as bases e evitar informações em falta na análise final.
 
 ## 🏗️ Arquitetura
-
-<!-- Insira aqui uma imagem do diagrama da sua arquitetura -->
-![Diagrama da Arquitetura](link_da_imagem)
-
-[ ]
+O fluxo de dados segue a arquitetura Medalhão e é orquestrado pelo Apache Airflow. Todo o ambiente de extração, Data Lake (MinIO) e Data Warehouse (PostgreSQL) está conteinerizado utilizando Docker.
+<img width="1292" height="621" alt="Diagrama_Arquitetura" src="https://github.com/user-attachments/assets/ba17bea0-0af9-4ac4-89ec-ccb16b9720cb" />
 
 ## 💻 Tecnologias Utilizadas
 
