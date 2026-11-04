@@ -1,9 +1,79 @@
-CSV (data/raw/)
-   ↓ (Airflow lê e processa)
-MinIO → bucket "bronze"   (dados brutos, direto da fonte, pouca transformação)
-   ↓ (Airflow limpa/tipa/deduplica)
-MinIO → bucket "silver"   (dados tratados, ainda em formato de arquivo/Parquet)
-   ↓ (Airflow agrega e carrega)
-Postgres → schema "gold"  (dados finais, prontos pro dashboard)
-   ↓
-Dashboard (PowerBI/Metabase/Streamlit conectando direto no Postgres)
+# [Nome do Projeto]
+
+<!-- Badges (opcional) -->
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-green)
+
+## 📋 Índice
+
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Arquitetura](#-arquitetura)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação e Execução](#-instalação-e-execução)
+- [Modelagem de Dados](#-modelagem-de-dados)
+- [Contato](#-contato)
+
+---
+
+## 📖 Sobre o Projeto
+
+Esse projeto foi desenvolvido com o objetivo de obter conhecimentos iniciais sobre Engenharia de Dados através de um pipeline ETL que analisa a relação entre a pobreza e a falta de estrutura educacional no Brasil. Futuramente, serão adicionados dados referentes à criminalidade, permitindo uma visão mais ampla a respeito das vulnerabilidades sociais.
+
+Para a criação desse pipeline, foram utilizadas três bases de dados públicas:
+
+* **[Censo Escolar 2024](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar):** Microdados utilizados para extrair métricas de infraestrutura das escolas por município (acesso à água, energia, esgoto, internet, etc.).
+* **[Cadastro Único 2024]():** Dados extraídos para contabilizar o volume de famílias em situação de pobreza e baixa renda.
+* **[População Estimada 2024](https://sidra.ibge.gov.br/tabela/6579):** Dados demográficos consumidos via API SIDRA para cruzamento e proporção dos indicadores.
+
+O ano de 2024 foi escolhido porque apresentou os dados mais completos e padronizados nas três plataformas simultaneamente. Essa consistência foi essencial para garantir um cruzamento confiável entre as bases e evitar informações em falta na análise final.
+
+## 🏗️ Arquitetura
+
+<!-- Insira aqui uma imagem do diagrama da sua arquitetura -->
+![Diagrama da Arquitetura](link_da_imagem)
+
+[ ]
+
+## 💻 Tecnologias Utilizadas
+
+- **[ ]**
+- **[ ]**
+- **[ ]**
+
+## ⚙️ Pré-requisitos
+
+[ ]
+
+- [ ]
+- [ ]
+
+## 🚀 Instalação e Execução
+
+### Passo 1: [ ]
+
+```bash
+# Comando de exemplo
+```
+
+### Passo 2: [ ]
+
+```bash
+# Comando de exemplo
+```
+
+## 📊 Modelagem de Dados
+
+[ ]
+
+<!-- Exemplo de tabela em Markdown -->
+| Camada | Descrição |
+| ------ | --------- |
+| Bronze | [ ]       |
+| Silver | [ ]       |
+| Gold   | [ ]       |
+
+## ✉️ Contato
+
+- **[Seu Nome]** - [Seu Email]
+- **LinkedIn**: [Link para o LinkedIn]
+- **Portfólio/GitHub**: [Link para o GitHub]
