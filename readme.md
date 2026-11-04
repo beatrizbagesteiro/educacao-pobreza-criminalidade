@@ -16,7 +16,7 @@
 
 ## 📖 Sobre o Projeto
 
-Esse projeto foi desenvolvido com o objetivo de obter conhecimentos iniciais sobre Engenharia de Dados através de um pipeline ETL que analisa a relação entre a pobreza e a falta de estrutura educacional no Brasil. Futuramente, serão adicionados dados referentes à criminalidade, permitindo uma visão mais ampla a respeito das vulnerabilidades sociais.
+Esse projeto foi desenvolvido para consolidar conhecimentos iniciais em Engenharia de Dados através de um pipeline que prepara os dados para uma análise futura sobre a relação entre a pobreza e a falta de estrutura educacional no Brasil. Futuramente, serão adicionados dados referentes à criminalidade, permitindo uma visão mais ampla a respeito das vulnerabilidades sociais.
 
 Para a criação desse pipeline, foram utilizadas três bases de dados públicas:
 
